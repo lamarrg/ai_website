@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="display: flex; justify-content: center; align-items: center; height: 70vh; text-align: center;">
+    <div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+        <div style="width: 100%; text-align: center; margin-bottom: 40px;">
+            <img src="{{ url_for('static', filename='img/your_logo.png') }}" alt="Website Logo" style="width: 40%; max-width: 400px; height: auto;">
+        </div>
+        <div style="display: flex; justify-content: center; width: 75%; max-width: 700px; background-color: #f3f3f3; border-radius: 25px; padding: 8px 16px; margin: auto;">
+            <input type="text" id="question" name="question" placeholder="What is your question or need?" style="font-style: italic; border: none; outline: none; background: transparent; flex-grow: 1;">
+            <button id="ask-btn" style="border: none; background: none; font-size: 24px;">
+                <img src="{{ url_for('static', filename='img/up_arrow.svg') }}" alt="Up Arrow" style="width: 24px; height: 24px;">
+            </button>
+        </div>
+
+        <div class="question-container">
+            <p>Select a question to ask, or enter your own:</p>
+            <div class="question-grid">
+                {% for question in random_questions %}
+                <button class="question-button" onclick="populateQuestion('{{ question }}')">{{ question }}</button>
+                {% endfor %}
+            </div>
+        </div>
+        <style>
+            .question-container {
+                margin-top: 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .question-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+                width: 75%;
+                max-width: 600px;
+            }
+            .question-button {
+                padding: 10px 20px;
+                font-size: 16px;
+                border: 1px solid var(--light-gray);
+                border-radius: 10px;
+                background-color: transparent;
+                color: var(--font-light);
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+            .question-button:hover {
+                background-color: var(--light-gray);
+                color: var(--website-orange);
+            }
+            @media (max-width: 600px) {
+                .question-grid {
+                    grid-template-columns: 1fr;
+                }
+                .question-button {
+                    width: 100%;
+                    box-sizing: border-box;
+                }
+            }
+        </style>
+        <script>
+            function populateQuestion(question) {
+                document.getElementById('question').value = question;
+                document.getElementById('ask-btn').click();
+            }
+        </script>
+       
+        <div style="margin: auto; margin-top: 30px; text-align: left; width:80%; " id="response-container"></div>
+    </div>
+</div>
+
+<!-- Add the JavaScript here -->
+<script src="{{ url_for('static', filename='main.js') }}"></script>
+
+{% endblock %}
