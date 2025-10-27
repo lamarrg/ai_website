@@ -2,7 +2,7 @@ This a base creation of an AI based website.
 
 It uses a Flask front end, a local LLM of your choice, Ollama, Boostrap and Faiss database. 
 
-Essentially, you can upload items to a folder, they are ingested and their data is to the Faiss database. The built in instructions tell the LLM to ony use data from said database to answer all questions. If the question is out of scope, let the user know. 
+Items can be uploaded to a folder, ingested, and the data is stored in the Faiss database. The built in instructions tell the LLM to ony use data from said database to answer all questions. If the question is out of scope, let the user know. 
 
 It's not as formal as training an LLM, but it works pretty darn well with as far as I got. 
 
